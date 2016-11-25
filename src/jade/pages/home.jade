@@ -1,0 +1,22 @@
+.form-group
+	input(type="text" class="form-control" placeholder="Пошук по всіх аудіозаписах" data-ng-model="search")
+div(ng-repeat="content in contents | filter:search" class="player")
+	.audio
+		audio(controls preload="none")
+			source(src="{{content.src}}" type="audio/mp3")
+	.title
+		a(ui-sref="autor({id: content.autorId})"){{content.autor}} 
+		a(href="" class="small")
+			| ({{content.album}}) 
+		| - {{content.title}}
+	.info
+		span(ng-if="content.like")
+			span(class="glyphicon glyphicon-heart" aria-hidden="true" ng-click="removeLike(content.id)")
+		span(ng-if="!content.like")
+			span(data-placement="top" title="Подобається" class="glyphicon glyphicon-heart-empty" aria-hidden="true" ng-click="addLike(content.id)")
+		span(ng-if="!content.myMusic")
+			span(data-placement="top" title="Додати в мої аудіозаписи" class="glyphicon glyphicon-plus" aria-hidden="true" data-toggle="tooltip" ng-click="addAudio(content.id)")
+		span(ng-if="content.myMusic")
+			span(class="glyphicon glyphicon-ok" aria-hidden="true" ng-click="removeAudio(content.id)")
+	.clear
+

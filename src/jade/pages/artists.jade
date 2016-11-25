@@ -1,0 +1,6 @@
+.row
+	.col-md-4(ng-repeat="autor in autors")
+		.block
+			a(ui-sref="autor({id: autor.id})")
+				img(src="{{autor.image}}", alt="" class="image-autor")
+				{{autor.name}}

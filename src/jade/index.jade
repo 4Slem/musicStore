@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+	meta(charset="UTF-8")
+	title MusicStore
+	//STYLES
+	link(rel="stylesheet", href="css/bootstrap.min.css")
+	link(rel="stylesheet", href="css/main.css")
+	//STYLES END
+body(data-ng-app="music")
+	nav.navbar.navbar-default
+		.container
+			.navbar-header
+				a(ui-sref="home" class="navbar-brand") MusicStore
+	main
+		.container-fluid
+			.col-md-3
+				ul.nav.nav-pills.nav-stacked
+					li(ui-sref-active="active")
+						a(ui-sref="home") Всі аудіозаписи
+					li(ui-sref-active="active")
+						a(ui-sref="myaudio") Мої аудіозаписи
+					li(ui-sref-active="active")
+						a(ui-sref="artists") Виконавці
+					li(ui-sref-active="active")
+						a(ui-sref="playlist") Мої плейлисти
+			.col-md-9
+				ui-view(data-ng-controller="mainCtr")
+		
+	//SCRIPTS
+	script(src="app/all.js")
+	//SCRIPTS END
