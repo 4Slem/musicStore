@@ -1,0 +1,57 @@
+.clear {
+  clear: both;
+}
+.player {
+  box-shadow: 0 0 1px #666;
+  margin: 20px 0;
+  border-radius: 3px;
+  position: relative;
+  color: #666;
+  font-weight: bold;
+}
+.player:hover {
+  box-shadow: 0 0 3px #666;
+}
+.player .audio {
+  height: 50px;
+  line-height: 50px;
+  float: left;
+}
+.player .audio audio {
+  margin: 9px 0;
+}
+.player .title {
+  margin: 0 10px;
+  float: left;
+  line-height: 50px;
+}
+.player .info {
+  line-height: 50px;
+  position: absolute;
+  height: 50px;
+  right: 0;
+  margin-right: 10px;
+}
+.player .info span {
+  margin: 5px;
+  cursor: pointer;
+}
+.image-autor {
+  width: 100%;
+  height: auto;
+  box-shadow: 0 0 1px;
+}
+.block {
+  box-shadow: 0 0 1px #666;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  line-height: 70px;
+  text-align: center;
+}
+.block a {
+  display: block;
+}
+.block:hover {
+  box-shadow: 0 0 3px #666;
+}
