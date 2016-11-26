@@ -2,7 +2,25 @@
 	.col-md-4
 		img(src="{{autor.image}}", alt="" class="image-autor")
 	.col-md-8
-		| Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, provident! Ratione voluptatem, beatae. Similique corporis vitae doloribus, laudantium animi autem architecto obcaecati est expedita deleniti, praesentium optio, accusamus, hic molestias!
+		table.table
+			tbody
+				td
+					h1 {{autor.name}}
+			tr
+				td 
+					|  Lorem ipsum dolor sit amet.
+			tr
+				td 
+					|  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sint minima, sit, eos eius mollitia laborum earum. Doloribus, eligendi, voluptatem!
+			tr
+				td
+					|  Lorem ipsum.
+			tr
+				td 
+					|  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam eaque rem, eius sapiente alias esse veniam similique maxime omnis, laborum distinctio iusto necessitatibus quam, numquam repudiandae! Consequatur beatae qui amet.
+			tr
+				td
+					|  Lorem ipsum dolor sit amet, consectetur adipisicing.
 .row
 	div(ng-repeat="content in music" class="player")
 		.audio
