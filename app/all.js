@@ -362,11 +362,11 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 		    controller: 'artistsCtrl'
   		}
 
-  		var playlist = {
-		    name: 'playlist',
-		    url: '/playlist',
-		    templateUrl: 'pages/playlist.html',
-		    controller: 'playlistCtrl'
+  		var playlists = {
+		    name: 'playlists',
+		    url: '/playlists',
+		    templateUrl: 'pages/playlists.html',
+		    controller: 'playlistsCtrl'
   		}
 
   		var autor = {
@@ -375,11 +375,19 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 		    templateUrl: 'pages/autor.html',
 		    controller: 'autorCtrl'
   		}
+
+  		var playlist = {
+		    name: 'playlist',
+		    url: '/playlist/:id',
+		    templateUrl: 'pages/playlist.html',
+		    controller: 'playlistCtrl'
+  		}
   		
   		$stateProvider.state(autor);
 		$stateProvider.state(home);
 		$stateProvider.state(myaudio);
   		$stateProvider.state(artists);
+  		$stateProvider.state(playlists);
   		$stateProvider.state(playlist);
 
 	});
@@ -389,7 +397,6 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 
 	function artistsCtrl($scope, autorFact) {
 		$scope.autors = autorFact;
-		console.log($scope.autor);
 	}
 })();
 (function () {
@@ -415,49 +422,32 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 (function () {
 	angular.module('music').controller('mainCtr', mainCtr);
 
-	function mainCtr($scope, contentFact) {
+	function mainCtr($scope, contentFact, playlistFact) {
 		$scope.contents = contentFact;
+		$scope.playlist = playlistFact;
+
+		$scope.addPlaylist = function () {
+			if(this.content.id in this.list.musicId) {
+				console.log("error");
+			}else {
+				this.list.musicId.push(this.content.id);
+			}
+		}
 
 		$scope.addAudio = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.myMusic = true;
-					console.log(contentFact);
-				}
-			}
-
+			this.content.myMusic = true;
 		}
 
 		$scope.removeAudio = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.myMusic = false;
-					console.log(contentFact);
-				}
-			}
-
+			this.content.myMusic = false;
 		}
 
 		$scope.addLike = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.like = true;
-					console.log(contentFact);
-				}
-			}
+			this.content.like = true;
 		}
 
 		$scope.removeLike = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.like = false;
-					console.log(contentFact);
-				}
-			}
+			this.content.like = false;
 		}
 	}
 })();
@@ -472,8 +462,81 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 (function () {
 	angular.module('music').controller('playlistCtrl', playlistCtrl);
 
-	function playlistCtrl ($scope) {
+	function playlistCtrl ($scope, $stateParams, playlistFact, contentFact) {
+		$scope.playlist = false;
+		$scope.playlistMusic = [];
+		for(elem of playlistFact) {
+			if($stateParams.id == elem.id) {
+				$scope.playlist = elem;
+			} else if(elem.id == false) {
+				console.log("ds");
+			}
+		}
+
+		for(music of contentFact) {
+			for(e of $scope.playlist.musicId) {
+				if(music.id == e) {
+					$scope.playlistMusic.push(music);
+				}
+			}
+		}
+
+		$scope.removePlaylist = function (id) {
+			for(var i=0; i<this.playlist.musicId.length; i++){
+				if(this.playlist.musicId[i] == this.content.id){
+					delete this.playlist.musicId[i];
+					delete $scope.playlist.musicId[i];
+				}
+			}
+		}
 		
+
+		
+	}
+})();
+(function () {
+	angular.module('music').controller('playlistsCtrl', playlistsCtrl);
+
+	function playlistsCtrl ($scope, playlistFact, idFact) {
+		$scope.formAddNewPlaylist = false;
+		$scope.playlist = playlistFact;
+		$scope.playListName = "";
+		$scope.PlayLidtDescription = "";
+
+		$scope.deletePlaylist = function () {
+			for(var i=0; i<$scope.playlist.length; i++) {
+				if(this.list.id == $scope.playlist[i].id){
+					console.log($scope.playlist[i]);
+					 $scope.playlist.splice(i, 1);
+					console.log(playlistFact);
+					
+				}
+			}
+		}
+
+		$scope.showFormAddNewPlaylist = function () {
+			$scope.formAddNewPlaylist = true;
+		}
+
+		$scope.addNewPlaylist = function (name, desc) {
+			var id = idFact.id;
+
+			var obj = {
+				listName: name,
+				id: id,
+				musicId: [],
+				desc: desc
+			}
+
+			idFact.id +=1;
+
+			playlistFact.push(obj);
+
+			$scope.playListName = "";
+			$scope.PlayLidtDescription = "";
+			$scope.formAddNewPlaylist = false;
+			
+		}
 	}
 })();
 (function () {
@@ -521,7 +584,7 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 				album: "New",
 				like: false,
 				image: " ",
-				myMusic: false,
+				myMusic: true,
 				user: "User 1"
 			},
 			{
@@ -557,7 +620,7 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 				album: "Like",
 				like: false,
 				image: " ",
-				myMusic: false,
+				myMusic: true,
 				user: "User 1"
 			},
 			{
@@ -581,7 +644,7 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 				album: " ",
 				like: false,
 				image: " ",
-				myMusic: false,
+				myMusic: true,
 				user: "User 1"
 			},
 			{
@@ -730,6 +793,25 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 			},
 		]
 	}
+})();
+(function () {
+	angular.module('music').factory('playlistFact', playlistFact);
+
+	function playlistFact () {
+		return [{
+				listName: "name",
+				id: 22,
+				musicId: [19,18],
+				desc: "desc"
+			}];
+	}
+
+	angular.module('music').factory('idFact', idFact);
+
+	function idFact () {
+		return {id: 1};
+	}
+
 })();
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
