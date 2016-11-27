@@ -3,10 +3,10 @@
 
 	function playlistFact () {
 		return [{
-				listName: "name",
+				listName: "Моя музика",
 				id: 22,
 				musicId: [19,18],
-				desc: "desc"
+				desc: "Моя улюблена музика"
 			}];
 	}
 

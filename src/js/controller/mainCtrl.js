@@ -6,11 +6,27 @@
 		$scope.playlist = playlistFact;
 
 		$scope.addPlaylist = function () {
-			if(this.content.id in this.list.musicId) {
-				console.log("error");
-			}else {
-				this.list.musicId.push(this.content.id);
+			thes = this;
+			var a = true;
+
+			function addlist(call) {
+				for(var i = 0; i < 4; i++) {
+					if(thes.content.id == thes.list.musicId[i]) {
+						a = false;
+						console.log("Вже існує");
+						return a;
+					}
+					
+				}
+				
+				call();
 			}
+
+			addlist(function() {
+				thes.list.musicId.push(thes.content.id);
+				console.log("Додано");
+			});
+
 		}
 
 		$scope.addAudio = function(id) {
