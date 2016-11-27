@@ -1,0 +1,22 @@
+.row
+	.col-md-12(ng-if="formAddNewPlaylist")
+		.addNewPlaylist
+			.form-group
+				label(for="ListName") Назва плейлиста
+				input(type="text" class="form-control" id="ListName" ng-model="playListName")
+			.form-group
+				label(for="PlayLidtDescription") Опис плейлиста
+				input(type="text" class="form-control" id="PlayLidtDescription" ng-model="PlayLidtDescription")
+			.form-group
+				button.btn.btn-primary(ng-click="addNewPlaylist(playListName, PlayLidtDescription)") Додати
+		hr
+	.col-md-3(ng-repeat="list in playlist" ng-if="list")
+		.block
+			.deletePlaylist(ng-click="deletePlaylist()")
+				span(class="glyphicon glyphicon-remove" aria-hidden="true")
+			a(ui-sref="playlist({id: list.id})"){{list.listName}}
+	.col-md-3(ng-if="!formAddNewPlaylist")
+		.block
+			a(href="" ng-click="showFormAddNewPlaylist()")
+				span(class="glyphicon glyphicon-plus" aria-hidden="true")
+

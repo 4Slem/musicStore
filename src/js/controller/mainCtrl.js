@@ -1,49 +1,32 @@
 (function () {
 	angular.module('music').controller('mainCtr', mainCtr);
 
-	function mainCtr($scope, contentFact) {
+	function mainCtr($scope, contentFact, playlistFact) {
 		$scope.contents = contentFact;
+		$scope.playlist = playlistFact;
+
+		$scope.addPlaylist = function () {
+			if(this.content.id in this.list.musicId) {
+				console.log("error");
+			}else {
+				this.list.musicId.push(this.content.id);
+			}
+		}
 
 		$scope.addAudio = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.myMusic = true;
-					console.log(contentFact);
-				}
-			}
-
+			this.content.myMusic = true;
 		}
 
 		$scope.removeAudio = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.myMusic = false;
-					console.log(contentFact);
-				}
-			}
-
+			this.content.myMusic = false;
 		}
 
 		$scope.addLike = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.like = true;
-					console.log(contentFact);
-				}
-			}
+			this.content.like = true;
 		}
 
 		$scope.removeLike = function(id) {
-			for(elem of contentFact) {
-				if(elem.id == id)
-				{
-					elem.like = false;
-					console.log(contentFact);
-				}
-			}
+			this.content.like = false;
 		}
 	}
 })();

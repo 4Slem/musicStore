@@ -12,7 +12,7 @@
 				album: "New",
 				like: false,
 				image: " ",
-				myMusic: false,
+				myMusic: true,
 				user: "User 1"
 			},
 			{
@@ -48,7 +48,7 @@
 				album: "Like",
 				like: false,
 				image: " ",
-				myMusic: false,
+				myMusic: true,
 				user: "User 1"
 			},
 			{
@@ -72,7 +72,7 @@
 				album: " ",
 				like: false,
 				image: " ",
-				myMusic: false,
+				myMusic: true,
 				user: "User 1"
 			},
 			{

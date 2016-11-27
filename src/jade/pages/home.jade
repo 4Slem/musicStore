@@ -1,5 +1,6 @@
 .form-group
 	input(type="text" class="form-control" placeholder="Пошук по всіх аудіозаписах" data-ng-model="search")
+hr
 div(ng-repeat="content in contents | filter:search" class="player")
 	.audio
 		audio(controls preload="none")
@@ -18,5 +19,23 @@ div(ng-repeat="content in contents | filter:search" class="player")
 			span(data-placement="top" title="Додати в мої аудіозаписи" class="glyphicon glyphicon-plus" aria-hidden="true" data-toggle="tooltip" ng-click="addAudio(content.id)")
 		span(ng-if="content.myMusic")
 			span(class="glyphicon glyphicon-ok" aria-hidden="true" ng-click="removeAudio(content.id)")
+	.playlist
+			.dropup
+				button(class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+					span.glyphicon.glyphicon-headphones
+				ul(class="dropdown-menu" aria-labelledby="dropdownMenu2")
+					li(ng-if="!playlist[0]")
+						li
+							a(ui-sref="playlists") 
+								span(class="glyphicon glyphicon-plus" aria-hidden="true") &nbsp
+								| Створити плейлист
+					li(ng-if="playlist[0]")
+						li(ng-repeat="list in playlist")
+								a(href="" ng-click="addPlaylist()") 
+									{{list.listName}} 
+									span(ng-if="showList")
+										span(class="glyphicon glyphicon-ok")
+
+									
 	.clear
 

@@ -22,11 +22,11 @@
 		    controller: 'artistsCtrl'
   		}
 
-  		var playlist = {
-		    name: 'playlist',
-		    url: '/playlist',
-		    templateUrl: 'pages/playlist.html',
-		    controller: 'playlistCtrl'
+  		var playlists = {
+		    name: 'playlists',
+		    url: '/playlists',
+		    templateUrl: 'pages/playlists.html',
+		    controller: 'playlistsCtrl'
   		}
 
   		var autor = {
@@ -35,11 +35,19 @@
 		    templateUrl: 'pages/autor.html',
 		    controller: 'autorCtrl'
   		}
+
+  		var playlist = {
+		    name: 'playlist',
+		    url: '/playlist/:id',
+		    templateUrl: 'pages/playlist.html',
+		    controller: 'playlistCtrl'
+  		}
   		
   		$stateProvider.state(autor);
 		$stateProvider.state(home);
 		$stateProvider.state(myaudio);
   		$stateProvider.state(artists);
+  		$stateProvider.state(playlists);
   		$stateProvider.state(playlist);
 
 	});

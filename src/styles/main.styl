@@ -28,6 +28,10 @@
 		span
 			margin 5px;
 			cursor pointer
+	.playlist
+		line-height 50px
+		position absolute
+		right 130px
 			
 .image-autor
 	width 100%
@@ -41,9 +45,19 @@
 	margin-bottom 20px
 	line-height 70px
 	text-align center
+	position relative;
 	a
 		display block
 	&:hover
 		box-shadow 0 0 3px #666
-		
+.deletePlaylist
+	position absolute
+	cursor pointer
+	right 10px
+	line-height 0
+	display none
+.block:hover>.deletePlaylist
+	display block
+p
+	color #666
 			

@@ -3,6 +3,5 @@
 
 	function artistsCtrl($scope, autorFact) {
 		$scope.autors = autorFact;
-		console.log($scope.autor);
 	}
 })();
