@@ -427,11 +427,27 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 		$scope.playlist = playlistFact;
 
 		$scope.addPlaylist = function () {
-			if(this.content.id in this.list.musicId) {
-				console.log("error");
-			}else {
-				this.list.musicId.push(this.content.id);
+			thes = this;
+			var a = true;
+
+			function addlist(call) {
+				for(var i = 0; i < 4; i++) {
+					if(thes.content.id == thes.list.musicId[i]) {
+						a = false;
+						console.log("Вже існує");
+						return a;
+					}
+					
+				}
+				
+				call();
 			}
+
+			addlist(function() {
+				thes.list.musicId.push(thes.content.id);
+				console.log("Додано");
+			});
+
 		}
 
 		$scope.addAudio = function(id) {
@@ -799,10 +815,10 @@ c){var e=a|0,f=c;void 0===f&&(f=Math.min(b(a),3));Math.pow(10,f);return 1==e&&0=
 
 	function playlistFact () {
 		return [{
-				listName: "name",
+				listName: "Моя музика",
 				id: 22,
 				musicId: [19,18],
-				desc: "desc"
+				desc: "Моя улюблена музика"
 			}];
 	}
 
